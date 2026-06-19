@@ -5,6 +5,14 @@
 **Status**: Draft
 **Input**: Port the approved, deployed Pharco corporate website into this codebase so it is visually identical to https://pharco-2025.vercel.app/ and the source in `/design-ref/`. Phase 1 is UI/UX only — no backend, no APIs, no database, no CMS wiring. Content comes from static sample data in `design-ref/src/data`.
 
+## Clarifications
+
+### Session 2026-06-20
+
+- Q: Is per-page SEO metadata (and sitemap/robots) in scope for Phase 1? → A: Full SEO — per-page title + meta description + Open Graph/Twitter tags + `sitemap.xml` + `robots.txt`, matching the live site; dynamic pages derive metadata from sample data.
+- Q: What measurable performance bar must each page meet? → A: Core Web Vitals "good" thresholds (LCP ≤ 2.5s, CLS ≤ 0.1, INP ≤ 200ms) on a mid-tier mobile profile. Performance is verified manually by the project owner (no local Lighthouse/perf runs by the implementer); the owner runs speed tests and shares results.
+- Q: Are a cookie-consent banner and/or web analytics in scope for Phase 1? → A: Neither — both cookie consent and analytics are deferred to a later phase.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Browse the corporate website end to end (Priority: P1)
@@ -150,11 +158,21 @@ backend dependency.
 - **FR-015**: The reCAPTCHA UI from the live site MUST be preserved visually but need not be
   functionally enforced in Phase 1.
 
+**SEO & metadata**
+
+- **FR-019**: Every page MUST expose SEO metadata matching the live site: a unique `<title>` and
+  meta description, plus Open Graph and Twitter card tags. Dynamic detail pages
+  (`products/[slug]`, `news-events/[slug]`, `news-events/events/[slug]`) MUST derive their
+  metadata from the sample content. The site MUST also serve a `sitemap.xml` covering in-scope
+  pages and a `robots.txt`.
+
 **Quality**
 
 - **FR-016**: The site MUST build and run with no dependency on a database or external API.
-- **FR-017**: Pages MUST optimize for fast first load (optimized images, minimal blocking
-  client work) consistent with an informative marketing site.
+- **FR-017**: Pages MUST meet Core Web Vitals "good" thresholds — LCP ≤ 2.5s, CLS ≤ 0.1,
+  INP ≤ 200ms — on a mid-tier mobile profile, via optimized images, minimal blocking client work,
+  and code-splitting. Performance is verified manually by the project owner (the implementer does
+  NOT run local Lighthouse/performance audits); the owner runs speed tests and provides results.
 - **FR-018**: Accessibility MUST be built into the markup and components — NOT delivered via a
   separate on-page accessibility widget. The site MUST use semantic HTML landmarks and a correct
   heading hierarchy; provide accessible names/labels for all interactive elements and form
@@ -204,6 +222,10 @@ backend dependency.
 - **SC-007**: Every page is fully operable by keyboard and screen reader, passes an automated
   accessibility audit (e.g. axe) with no critical violations, and meets WCAG 2.1 AA contrast —
   with no reliance on a separate on-page accessibility widget.
+- **SC-008**: Every in-scope page exposes a unique title, meta description, and Open Graph/Twitter
+  tags; `sitemap.xml` lists all in-scope pages and `robots.txt` is served.
+- **SC-009**: Each page meets Core Web Vitals "good" thresholds (LCP ≤ 2.5s, CLS ≤ 0.1,
+  INP ≤ 200ms) on a mid-tier mobile profile, confirmed by owner-run manual speed tests.
 
 ## Assumptions
 
@@ -214,7 +236,7 @@ backend dependency.
 - Sample content needed for listings and detail pages exists in `design-ref/src/data` and is
   sufficient to render Phase 1 without a CMS.
 - Form submission, real reCAPTCHA enforcement, email/notifications, persistence, the Payload CMS,
-  PostgreSQL, EN/AR localization, and any admin-panel work are explicitly deferred to later
-  phases.
+  PostgreSQL, EN/AR localization, cookie-consent banner, web analytics/tracking, and any
+  admin-panel work are explicitly deferred to later phases.
 - Visual parity is judged against the live deployed pages (current state) at standard desktop,
   tablet, and mobile widths.
