@@ -42,9 +42,5 @@ next-env.d.ts
 
 /media
 
-# Playwright
-node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
+# design reference only — not compiled, linted, or tracked
+/design-ref/
