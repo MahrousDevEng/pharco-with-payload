@@ -1,7 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import './globals.css'
-import { titleFont, textFont } from '@/lib/fonts'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ScrollToTop from '@/components/global/ScrollToTop'
@@ -30,7 +29,7 @@ export default function FrontendLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en" className={`${titleFont.variable} ${textFont.variable}`}>
+    <html lang="en">
       <body suppressHydrationWarning>
         <Header />
         {children}

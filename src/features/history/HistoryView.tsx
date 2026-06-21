@@ -139,7 +139,7 @@ export default function HistoryView() {
         />
       </div>
 
-      <div className="sticky top-[var(--header-height)] z-[40] bg-white border-b border-gray-200 shadow-sm max-md:hidden">
+      <div className="sticky top-[var(--header-height)] z-[40] bg-white border-b border-gray-200 shadow-xs max-md:hidden">
         <div className="mx-auto px-4">
           <div className="relative flex items-center justify-center">
             <button

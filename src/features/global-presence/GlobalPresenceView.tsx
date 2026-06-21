@@ -643,7 +643,7 @@ export default function GlobalPresenceView() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-200 bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-200 bg-white rounded-2xl shadow-xs overflow-hidden">
             {FOOTPRINT_STATS.map((s, i) => (
               <StatBlock key={s.label} {...s} index={i} />
             ))}

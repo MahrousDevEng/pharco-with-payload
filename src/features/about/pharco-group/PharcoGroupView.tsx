@@ -557,7 +557,7 @@ export default function PharcoGroupView() {
                 onClick={() => scrollCarousel("left")}
                 disabled={!canScrollLeft}
                 aria-label="Previous companies"
-                className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center shadow-sm disabled:opacity-25 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center shadow-xs disabled:opacity-25 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -565,7 +565,7 @@ export default function PharcoGroupView() {
                 onClick={() => scrollCarousel("right")}
                 disabled={!canScrollRight}
                 aria-label="Next companies"
-                className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center shadow-sm disabled:opacity-25 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center shadow-xs disabled:opacity-25 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

@@ -115,7 +115,7 @@ const AboutSection = () => {
   }, []);
 
   const cardClass = (index: number) =>
-    `stat-item group relative top-0 overflow-hidden p-6 rounded-xl border-l-4 border-primary shadow-sm transition-all duration-300 block ${
+    `stat-item group relative top-0 overflow-hidden p-6 rounded-xl border-l-4 border-primary shadow-xs transition-all duration-300 block ${
       activeIndex === index
         ? "bg-primary text-white shadow-xl -top-2"
         : "bg-primary/10 hover:bg-primary hover:text-white hover:shadow-xl hover:-top-2"

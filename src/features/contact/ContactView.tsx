@@ -380,7 +380,7 @@ export default function ContactView() {
             >
               <form
                 onSubmit={handleSubmit}
-                className="rounded-3xl bg-white border border-neutral-100 p-8 md:p-10 shadow-sm"
+                className="rounded-3xl bg-white border border-neutral-100 p-8 md:p-10 shadow-xs"
               >
                 {/* TOPIC RADIO PILLS */}
                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500 mb-3">
@@ -559,7 +559,7 @@ export default function ContactView() {
               transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT }}
               className="lg:col-span-7"
             >
-              <div className="rounded-3xl bg-white border border-neutral-100 p-8 md:p-10 shadow-sm space-y-6">
+              <div className="rounded-3xl bg-white border border-neutral-100 p-8 md:p-10 shadow-xs space-y-6">
                 <div className="flex items-center gap-3 pb-5 border-b border-neutral-100">
                   <Building2 className="w-6 h-6 text-primary" strokeWidth={1.6} />
                   <span className="font-bold text-secondary">Pharco Corporation</span>
@@ -620,7 +620,7 @@ export default function ContactView() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={mapInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.15, ease: EASE_OUT }}
-            className="rounded-3xl overflow-hidden border border-neutral-100 shadow-sm relative"
+            className="rounded-3xl overflow-hidden border border-neutral-100 shadow-xs relative"
           >
             <iframe
               title="Pharco Corporation HQ, New Cairo"

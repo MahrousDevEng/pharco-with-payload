@@ -243,7 +243,7 @@ export default function ProductDetailView() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.06, ease: EASE }}
-                className="rounded-2xl border border-neutral-200 bg-white p-6 hover:border-primary/40 hover:shadow-sm transition-all duration-300"
+                className="rounded-2xl border border-neutral-200 bg-white p-6 hover:border-primary/40 hover:shadow-xs transition-all duration-300"
               >
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary block mb-3">
                   {b.t}

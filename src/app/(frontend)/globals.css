@@ -97,43 +97,50 @@
   --toaster-height: 40px;
 }
 
-* {
-  box-sizing: border-box;
+/* Element resets in @layer base so Tailwind utilities (incl. hover: colors) win
+   over them — matches v3 specificity behavior (v4 unlayered rules would otherwise
+   beat utilities, e.g. `a{color:inherit}` overriding `hover:text-primary`). */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
+  }
+  body {
+    margin: 0;
+    font-family: "Ubuntu", system-ui, sans-serif;
+    font-weight: 300;
+    color: #222;
+    background: #fff;
+    overflow-x: hidden;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    line-height: 1.65;
+  }
 }
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--header-h);
-}
-body {
-  margin: 0;
-  font-family: "Ubuntu", system-ui, sans-serif;
-  font-weight: 300;
-  color: #222;
-  background: #fff;
-  overflow-x: hidden;
-}
-img {
-  max-width: 100%;
-  display: block;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 400;
-  margin: 0;
-}
-p {
-  margin: 0;
-  line-height: 1.65;
-}
+
+/* Unlayered so v4's `container` utility can't override design-ref's 1280px */
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -142,7 +149,7 @@ p {
 
 @layer base {
   body {
-    @apply bg-white scroll-smooth text-base w-full overflow-x-hidden;
+    @apply w-full overflow-x-hidden scroll-smooth bg-white text-base;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -150,7 +157,7 @@ p {
   }
 
   ::-webkit-scrollbar {
-    @apply w-1 bg-primary;
+    @apply bg-primary w-1;
   }
 
   h1,
@@ -168,34 +175,32 @@ p {
 
 @layer utilities {
   .main_banner {
-    @apply h-[60vh] overflow-hidden relative w-full before:content-[''] before:absolute before:block before:w-full before:h-full before:top-0 before:left-0 before:bg-primary/55 before:z-10 md:h-[100vh];
+    @apply before:bg-primary/55 relative h-[60vh] w-full overflow-hidden before:absolute before:top-0 before:left-0 before:z-10 before:block before:h-full before:w-full before:content-[''] md:h-screen;
   }
 
   .light_background {
-    @apply bg-[#f4f2eb] bg-no-repeat bg-fixed bg-cover;
+    @apply bg-[#f4f2eb] bg-cover bg-fixed bg-no-repeat;
   }
 
   .investor_sec {
-    @apply w-full relative before:content-[''] before:absolute before:block before:z-10
-     /* before:bg-primary before:bg-opacity-55 */
-      before:top-0 before:left-0 before:w-full before:h-full;
+    @apply /* before:bg-primary before:bg-opacity-55 */ relative w-full before:absolute before:top-0 before:left-0 before:z-10 before:block before:h-full before:w-full before:content-[''];
   }
 
   .brand_card {
-    @apply block relative h-[200px] md:h-[400px] lg:h-[350px] mb-5 overflow-hidden  [&>.title]:font-bold z-10;
+    @apply relative z-10 mb-5 block h-50 overflow-hidden md:h-100 lg:h-87.5 [&>.title]:font-bold;
   }
 
   .hover_links {
-    @apply w-fit relative capitalize hover:text-primary before:content-[''] before:absolute before:-bottom-2 before:left-0  before:w-0 hover:before:w-[100%] before:h-[1px] before:bg-primary before:transition-all before:ease-in-out before:duration-500;
+    @apply hover:text-primary before:bg-primary relative w-fit capitalize before:absolute before:-bottom-2 before:left-0 before:h-px before:w-0 before:transition-all before:duration-500 before:ease-in-out before:content-[''] hover:before:w-full;
   }
 
   .totop_btn {
-    @apply flex justify-center items-center fixed bottom-5 right-5 w-10 h-10 leading-7 text-white cursor-pointer z-[99] bg-primary rounded-md shadow-lg transition-all ease-in-out duration-500;
+    @apply bg-primary fixed right-5 bottom-5 z-99 flex h-10 w-10 cursor-pointer items-center justify-center rounded-md leading-7 text-white shadow-lg transition-all duration-500 ease-in-out;
   }
 }
 
 .activeLink {
-  @apply relative text-primary before:content-[''] before:absolute before:-bottom-2 before:left-0  before:w-full before:h-[1px] before:bg-primary before:transition-all before:ease-in-out before:duration-500;
+  @apply text-primary before:bg-primary relative before:absolute before:-bottom-2 before:left-0 before:h-px before:w-full before:transition-all before:duration-500 before:ease-in-out before:content-[''];
 }
 .animated-title-dark {
   -webkit-text-stroke: 0.4px;
@@ -1691,11 +1696,7 @@ nav > div {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 35%,
-    rgba(20, 22, 30, 0.85) 100%
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(20, 22, 30, 0.85) 100%);
 }
 .heritage-card .meta {
   position: absolute;
@@ -2465,11 +2466,7 @@ nav > div {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(224, 126, 39, 0.08),
-    transparent 50%
-  );
+  background: radial-gradient(circle at 30% 30%, rgba(224, 126, 39, 0.08), transparent 50%);
 }
 .pd-pack .ph {
   text-align: center;
@@ -2850,11 +2847,7 @@ nav > div {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(33, 38, 53, 0.15),
-    rgba(224, 126, 39, 0.25)
-  );
+  background: linear-gradient(135deg, rgba(33, 38, 53, 0.15), rgba(224, 126, 39, 0.25));
 }
 .hepc-feature .hepc-body {
   padding: 48px 44px;
@@ -2905,11 +2898,7 @@ nav > div {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(33, 38, 53, 0.55) 100%
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(33, 38, 53, 0.55) 100%);
 }
 .platform-img .platform-tag {
   position: absolute;
@@ -3114,11 +3103,7 @@ nav > div {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(20, 22, 30, 0.78) 100%
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(20, 22, 30, 0.78) 100%);
 }
 .fac-tile .cap {
   position: absolute;
@@ -3485,11 +3470,7 @@ nav > div {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 40%,
-    rgba(20, 22, 30, 0.85) 100%
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(20, 22, 30, 0.85) 100%);
 }
 .reg-img-card .meta {
   position: absolute;
@@ -4054,11 +4035,7 @@ nav > div {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 45%,
-    rgba(20, 22, 30, 0.85) 100%
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(20, 22, 30, 0.85) 100%);
 }
 .culture-tile .meta {
   position: absolute;
@@ -5781,4 +5758,11 @@ nav > div {
 }
 .art-related-all:hover {
   text-decoration: underline;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }
