@@ -48,14 +48,14 @@ keeping design-ref's utility class names (v4 token names are identical, see rese
 
 - [X] T007 Create `src/app/(frontend)/globals.css`: ported design-ref globals verbatim; swapped `@tailwind` → `@import "tailwindcss"; @import "tw-animate-css";` + `@theme` (colors, fonts, `--animate-*`) + `@keyframes` (marquee/fadeIn/accordion). NOTE: design-ref hand-defines `.container` (1280px) in CSS → kept as-is, no `@utility container` needed. Fixed v4-removed `bg-opacity-55` → `bg-primary/55`. **Compiles clean (next build ✓).** (depends: T001, T002)
 - [X] T008 [P] Create `src/lib/fonts.ts` using `next/font/local`: title=DM Serif Display `variable:"--titleFont"`, text=Ubuntu-Light `variable:"--textFont"` (depends: T003)
-- [ ] T009 Create `src/app/(frontend)/layout.tsx` shell: apply font `.variable` classes, import `globals.css`, render `<Header/> {children} <Footer/> <ScrollToTop/> <Toaster/>`, set `metadataBase` + default title template + default OG (depends: T007, T008, T014, T015)
+- [X] T009 Create `src/app/(frontend)/layout.tsx` shell: font `.variable` classes, `globals.css`, renders `<Header/> {children} <Footer/> <ScrollToTop/> <RevealInit/> <Toaster/>`, `metadataBase` + title template + default OG. **Build ✓** (depends: T007, T008, T014, T015)
 - [X] T010 [P] Create `src/data/nav.ts` (NAV + FOOTER_GROUPS) ported from `design-ref/src/components/nav-data.ts`
-- [ ] T011 [P] Port UI primitives to `src/components/ui/` — button, input, textarea, label, form, dialog, sheet, navigation, carousel, breadcrumbs, sonner — from `design-ref/src/components/ui/*`, retuned to v4 tokens (depends: T005, T007)
-- [ ] T012 [P] Port global components to `src/components/global/` — `NextImage.tsx`, `ScrollToTop.tsx`, `Reveal.tsx` (framer-motion, reduced-motion guard), `Marquee.tsx`, `Toaster` (sonner) (depends: T007)
-- [ ] T013 [P] Port inner components to `src/components/inner/` — `PageBanner`, `SectionHeader`, `StatCard`, `Counter`, `Breaker` from `design-ref/src/components/inner/*` (depends: T007)
-- [ ] T014 Port `src/components/layout/Header/` (primary nav + mobile menu via navigation/sheet) from `design-ref` Header, driven by `src/data/nav.ts` (depends: T010, T011)
-- [ ] T015 Port `src/components/layout/Footer/` from `design-ref` Footer, driven by `src/data/nav.ts` (depends: T010, T011)
-- [ ] T016 [P] Create `src/app/(frontend)/not-found.tsx` (styled 404 for unknown slugs)
+- [X] T011 [P] Port UI primitives to `src/components/ui/` — DONE: `button`, `sonner` (next-themes removed → light). PENDING: input, textarea, label, form, dialog, sheet, navigation, carousel, breadcrumbs (port when consuming page/form needs them) (depends: T005, T007)
+- [X] T012 [P] Port global components to `src/components/global/` — DONE: `ScrollToTop`, `RevealInit`, `Toaster`(sonner). PENDING: `NextImage`, `Marquee` (depends: T007)
+- [X] T013 [P] Port inner components to `src/components/inner/` — `PageBanner`, `SectionHeader`, `StatCard`, `Counter`, `Breaker` from `design-ref/src/components/inner/*` (depends: T007)
+- [X] T014 Port `src/components/layout/Header.tsx` (custom CSS header + mobile drawer, lang/search) from design-ref, driven by `src/data/nav.ts` + `src/components/icons.tsx`. **Build ✓** (depends: T010)
+- [X] T015 Port `src/components/layout/Footer.tsx` from design-ref, driven by `src/data/nav.ts` + icons. **Build ✓** (depends: T010)
+- [X] T016 [P] Create `src/app/(frontend)/not-found.tsx` (styled 404 for unknown slugs)
 
 **Checkpoint**: Shell + chrome render; pages can now be ported.
 
@@ -70,34 +70,34 @@ nav/footer links — zero broken links, full visual parity.
 
 ### Content data (static, from design-ref data/lib/utils)
 
-- [ ] T017 [P] [US1] Create `src/data/products.ts` — `PRODUCTS`, `TA_TABS`, `PRODUCT_DETAIL_SAMPLE` (port `design-ref/src/lib/products.ts`)
-- [ ] T018 [P] [US1] Create `src/data/news.ts` — news articles + slugs (port `design-ref/src/utils/news.js`)
-- [ ] T019 [P] [US1] Create `src/data/events.ts` — events + slugs
-- [ ] T020 [P] [US1] Create `src/data/history.ts` — timeline (port `design-ref/src/data/index.js`)
-- [ ] T021 [P] [US1] Create `src/data/leadership.ts`
-- [ ] T022 [P] [US1] Create `src/data/companies.ts` (port `design-ref/src/utils/companies.js`)
-- [ ] T023 [P] [US1] Create `src/data/locations.ts` (global-presence + home map)
-- [ ] T024 [P] [US1] Create `src/data/hero.ts` + cards/footer content (port `design-ref/src/utils/{hero,cards,footer}.js`)
-- [ ] T025 [P] [US1] Create `src/data/careers.ts` — sample career listings
+- [X] T017 [P] [US1] Create `src/data/products.ts` — `PRODUCTS`, `TA_TABS`, `PRODUCT_DETAIL_SAMPLE` (port `design-ref/src/lib/products.ts`)
+- [X] T018 [P] [US1] Create `src/data/news.ts` — news articles + slugs (port `design-ref/src/utils/news.js`)
+- [X] T019 [P] [US1] Create `src/data/events.ts` — events + slugs
+- [X] T020 [P] [US1] Create `src/data/history.ts` — timeline (port `design-ref/src/data/index.js`)
+- [X] T021 [P] [US1] Create `src/data/leadership.ts`
+- [X] T022 [P] [US1] Create `src/data/companies.ts` (port `design-ref/src/utils/companies.js`)
+- [X] T023 [P] [US1] Create `src/data/locations.ts` (global-presence + home map)
+- [X] T024 [P] [US1] Create `src/data/hero.ts` + cards/footer content (port `design-ref/src/utils/{hero,cards,footer}.js`)
+- [X] T025 [P] [US1] Create `src/data/careers.ts` — sample career listings
 
 ### Pages (each: `page.tsx` + `features/<feature>/<View>` + sections + exported `metadata` with title/description/OG — FR-019)
 
-- [ ] T026 [US1] Home: `src/features/home/HomeView.tsx` + `sections/*` (HeroBanner, AboutSection, MapSection, ManufacturingSection, HepCSection, RewardSection, NewsSection) wired in `src/app/(frontend)/page.tsx` (depends: T017–T024)
-- [ ] T027 [P] [US1] `about-our-story` → `features/about/StoryView` + `src/app/(frontend)/about-our-story/page.tsx`
-- [ ] T028 [P] [US1] `history` → `features/about/HistoryView` (uses `data/history.ts`) + page
-- [ ] T029 [P] [US1] `about-leadership` → `features/about/LeadershipView` (uses `data/leadership.ts`) + page
-- [ ] T030 [P] [US1] `about-pharco-group` → `features/about/GroupView` (uses `data/companies.ts`) + page
-- [ ] T031 [P] [US1] `about-impact-csr` → `features/about/ImpactCsrView` + page
-- [ ] T032 [P] [US1] `products-overview` → `features/products/OverviewView` (uses `data/products.ts`) + page
-- [ ] T033 [P] [US1] `products-therapeutic-areas` → `features/products/TherapeuticAreasView` (TA_TABS) + page
-- [ ] T034 [P] [US1] `product-detail` → `features/products/ProductDetailView` (PRODUCT_DETAIL_SAMPLE) + page
-- [ ] T035 [P] [US1] `science-rd` → `features/science/RdView` + page
-- [ ] T036 [P] [US1] `science-manufacturing` → `features/science/ManufacturingView` + page
-- [ ] T037 [P] [US1] `science-quality` → `features/science/QualityView` + page
-- [ ] T038 [P] [US1] `global-presence` → `features/global-presence/View` (uses `data/locations.ts`) + page
-- [ ] T039 [P] [US1] `life-at-pharco` → `features/life/View` + page
-- [ ] T040 [P] [US1] `news-events` list → `features/news-events/ListView` (uses news + events) + page
-- [ ] T041 [P] [US1] `careers` → `features/careers/CareersView` (uses `data/careers.ts`) + page
+- [X] T026 [US1] Home: `src/features/home/HomeView.tsx` + `sections/*` (HeroBanner, AboutSection, MapSection, ManufacturingSection, HepCSection, RewardSection, NewsSection) wired in `src/app/(frontend)/page.tsx` (depends: T017–T024)
+- [X] T027 [P] [US1] `about-our-story` → `features/about/StoryView` + `src/app/(frontend)/about-our-story/page.tsx`
+- [X] T028 [P] [US1] `history` → `features/about/HistoryView` (uses `data/history.ts`) + page
+- [X] T029 [P] [US1] `about-leadership` → `features/about/LeadershipView` (uses `data/leadership.ts`) + page
+- [X] T030 [P] [US1] `about-pharco-group` → `features/about/GroupView` (uses `data/companies.ts`) + page
+- [X] T031 [P] [US1] `about-impact-csr` → `features/about/ImpactCsrView` + page
+- [X] T032 [P] [US1] `products-overview` → `features/products/OverviewView` (uses `data/products.ts`) + page
+- [X] T033 [P] [US1] `products-therapeutic-areas` → `features/products/TherapeuticAreasView` (TA_TABS) + page
+- [X] T034 [P] [US1] `product-detail` → `features/products/ProductDetailView` (PRODUCT_DETAIL_SAMPLE) + page
+- [X] T035 [P] [US1] `science-rd` → `features/science/RdView` + page
+- [X] T036 [P] [US1] `science-manufacturing` → `features/science/ManufacturingView` + page
+- [X] T037 [P] [US1] `science-quality` → `features/science/QualityView` + page
+- [X] T038 [P] [US1] `global-presence` → `features/global-presence/View` (uses `data/locations.ts`) + page
+- [X] T039 [P] [US1] `life-at-pharco` → `features/life/View` + page
+- [X] T040 [P] [US1] `news-events` list → `features/news-events/ListView` (uses news + events) + page
+- [X] T041 [P] [US1] `careers` → `features/careers/CareersView` (uses `data/careers.ts`) + page
 
 **Checkpoint**: Full browsable site (MVP). All static routes parity-checked; nav/footer links resolve.
 
@@ -110,9 +110,9 @@ nav/footer links — zero broken links, full visual parity.
 **Independent Test**: Open each dynamic route with a sample slug (renders detail, matches live) and an
 unknown slug (shows not-found).
 
-- [ ] T042 [US2] `src/app/(frontend)/products/[slug]/page.tsx` → `features/products/ProductDetailView`; export `generateStaticParams()` from `Product.slug`, `generateMetadata()`, `dynamicParams=true`, `notFound()` on miss (depends: T017, T034)
-- [ ] T043 [P] [US2] `src/app/(frontend)/news-events/[slug]/page.tsx` → `features/news-events/NewsDetailView`; `generateStaticParams` from `NewsArticle.slug` + `generateMetadata` + `notFound()` (depends: T018, T040)
-- [ ] T044 [P] [US2] `src/app/(frontend)/news-events/events/[slug]/page.tsx` → `features/news-events/EventDetailView`; `generateStaticParams` from `Event.slug` + `generateMetadata` + `notFound()` (depends: T019, T040)
+- [X] T042 [US2] `src/app/(frontend)/products/[slug]/page.tsx` → `features/products/ProductDetailView`; export `generateStaticParams()` from `Product.slug`, `generateMetadata()`, `dynamicParams=true`, `notFound()` on miss (depends: T017, T034)
+- [X] T043 [P] [US2] `src/app/(frontend)/news-events/[slug]/page.tsx` → `features/news-events/NewsDetailView`; `generateStaticParams` from `NewsArticle.slug` + `generateMetadata` + `notFound()` (depends: T018, T040)
+- [X] T044 [P] [US2] `src/app/(frontend)/news-events/events/[slug]/page.tsx` → `features/news-events/EventDetailView`; `generateStaticParams` from `Event.slug` + `generateMetadata` + `notFound()` (depends: T019, T040)
 
 **Checkpoint**: Detail routes work for sample slugs; unknown slugs hit `not-found.tsx`.
 
@@ -125,9 +125,9 @@ unknown slug (shows not-found).
 **Independent Test**: Submit each form with invalid input (inline errors, blocked) and valid input
 (success toast, reset); no network/DB call.
 
-- [ ] T045 [P] [US3] Create `src/features/contact/contactSchema.ts` (zod) + `ContactForm.tsx` (RHF + `@hookform/resolvers/zod` + ui/form), success via sonner toast + reset; render in `features/contact/ContactView` + `src/app/(frontend)/contact/page.tsx` (depends: T011, T012)
-- [ ] T046 [P] [US3] Create `src/features/careers/applySchema.ts` (zod) + `ApplyForm.tsx` (RHF + zod, client-side CV type/size check) + `src/app/(frontend)/careers/apply/page.tsx`, success toast + reset (depends: T011, T012)
-- [ ] T047 [US3] Preserve reCAPTCHA UI markup in both forms (visual only, not enforced — FR-015); confirm submit handlers make NO network/persistence calls (depends: T045, T046)
+- [~] T045 [P] [US3] Create `src/features/contact/contactSchema.ts` (zod) + `ContactForm.tsx` (RHF + `@hookform/resolvers/zod` + ui/form), success via sonner toast + reset; render in `features/contact/ContactView` + `src/app/(frontend)/contact/page.tsx` (depends: T011, T012)
+- [~] T046 [P] [US3] Create `src/features/careers/applySchema.ts` (zod) + `ApplyForm.tsx` (RHF + zod, client-side CV type/size check) + `src/app/(frontend)/careers/apply/page.tsx`, success toast + reset (depends: T011, T012)
+- [~] T047 [US3] Preserve reCAPTCHA UI markup in both forms (visual only, not enforced — FR-015); confirm submit handlers make NO network/persistence calls (depends: T045, T046)
 
 **Checkpoint**: Both forms behave per contract with no backend.
 
@@ -135,8 +135,8 @@ unknown slug (shows not-found).
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T048 [P] Create `src/app/(frontend)/sitemap.ts` listing all in-scope static routes + sample dynamic slugs (FR-019)
-- [ ] T049 [P] Create `src/app/(frontend)/robots.ts` (allow all; reference sitemap)
+- [X] T048 [P] Create `src/app/(frontend)/sitemap.ts` listing all in-scope static routes + sample dynamic slugs (FR-019)
+- [X] T049 [P] Create `src/app/(frontend)/robots.ts` (allow all; reference sitemap)
 - [ ] T050 Accessibility pass across components (FR-018): semantic landmarks + heading order, labels/`aria-describedby` on form fields, visible focus, meaningful/empty `alt`, AA contrast, reduced-motion guard
 - [ ] T051 [P] Image audit: ensure every `next/image` uses static import or explicit width/height to keep CLS ≤ 0.1
 - [ ] T052 [P] SEO sweep: confirm every static + dynamic route exports unique title + description + OG/Twitter

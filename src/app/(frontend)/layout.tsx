@@ -2,6 +2,11 @@ import React from 'react'
 import type { Metadata } from 'next'
 import './globals.css'
 import { titleFont, textFont } from '@/lib/fonts'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import ScrollToTop from '@/components/global/ScrollToTop'
+import RevealInit from '@/components/global/RevealInit'
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pharco-2025.vercel.app'),
@@ -27,8 +32,12 @@ export default function FrontendLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${titleFont.variable} ${textFont.variable}`}>
       <body suppressHydrationWarning>
-        {/* TODO(foundational): <Header/> … <Footer/> <ScrollToTop/> <Toaster/> (tasks T009/T014/T015) */}
+        <Header />
         {children}
+        <Footer />
+        <ScrollToTop />
+        <RevealInit />
+        <Toaster />
       </body>
     </html>
   )

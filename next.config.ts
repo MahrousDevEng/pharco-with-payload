@@ -12,6 +12,17 @@ const nextConfig: NextConfig = {
       {
         pathname: "/api/media/file/**",
       },
+      {
+        pathname: "/images/**",
+      },
+    ],
+    // Phase 1 uses sample/demo imagery from many external hosts (unsplash, flags,
+    // partner logos). Wildcard for now; tighten to an explicit allowlist later.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
   webpack: (webpackConfig) => {
