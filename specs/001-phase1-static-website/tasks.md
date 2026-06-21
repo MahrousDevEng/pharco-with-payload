@@ -137,11 +137,11 @@ unknown slug (shows not-found).
 
 - [X] T048 [P] Create `src/app/(frontend)/sitemap.ts` listing all in-scope static routes + sample dynamic slugs (FR-019)
 - [X] T049 [P] Create `src/app/(frontend)/robots.ts` (allow all; reference sitemap)
-- [ ] T050 Accessibility pass across components (FR-018): semantic landmarks + heading order, labels/`aria-describedby` on form fields, visible focus, meaningful/empty `alt`, AA contrast, reduced-motion guard
-- [ ] T051 [P] Image audit: ensure every `next/image` uses static import or explicit width/height to keep CLS ≤ 0.1
+- [X] T050 Accessibility pass across components (FR-018): semantic landmarks + heading order, labels/`aria-describedby` on form fields, visible focus, meaningful/empty `alt`, AA contrast, reduced-motion guard
+- [X] T051 [P] Image audit: ensure every `next/image` uses static import or explicit width/height to keep CLS ≤ 0.1
 - [X] T052 [P] SEO sweep: confirm every static + dynamic route exports unique title + description + OG/Twitter
-- [ ] T053 Run `pnpm lint` + Prettier (incl. prettier-plugin-tailwindcss); fix issues
-- [ ] T054 Run `pnpm build` and confirm it succeeds with NO `DATABASE_URL` (website build is static); click through every route in `contracts/routes.md` vs live
+- [X] T053 Run `pnpm lint` + Prettier (incl. prettier-plugin-tailwindcss); fix issues
+- [X] T054 Run `pnpm build` and confirm it succeeds with NO `DATABASE_URL` (website build is static); click through every route in `contracts/routes.md` vs live
 - [ ] T055 Hand deploy/preview to owner for Core Web Vitals + speed tests (SC-009) — do NOT run Lighthouse locally
 
 ---

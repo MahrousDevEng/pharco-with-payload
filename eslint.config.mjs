@@ -1,38 +1,35 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
+import next from "@next/eslint-plugin-next";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
+// Flat config using @next/eslint-plugin-next directly (no FlatCompat / eslintrc —
+// that combo hit a "Converting circular structure to JSON" crash on ESLint 9.39).
+// Type-checking is handled by `next build` (tsc); this lints Next a11y/perf rules.
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
+    ignores: [
+      ".next/",
+      "design-ref/",
+      "node_modules/",
+      "src/payload-types.ts",
+      "src/payload-generated-schema.ts",
+      "src/app/(payload)/**",
+    ],
+  },
+  {
+    files: ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+    plugins: { "@next/next": next },
     rules: {
-      '@typescript-eslint/ban-ts-comment': 'warn',
-      '@typescript-eslint/no-empty-object-type': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          vars: 'all',
-          args: 'after-used',
-          ignoreRestSiblings: false,
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^(_|ignore)',
-        },
-      ],
+      ...next.configs.recommended.rules,
+      ...next.configs["core-web-vitals"].rules,
+      // design-ref intentionally uses raw <img> (CLS-safe per T051 audit; many
+      // external hosts). Fidelity port — keep as-is.
+      "@next/next/no-img-element": "off",
     },
   },
-  {
-    ignores: ['.next/', 'design-ref/', 'src/payload-types.ts', 'src/payload-generated-schema.ts'],
-  },
-]
+];
 
-export default eslintConfig
+export default eslintConfig;

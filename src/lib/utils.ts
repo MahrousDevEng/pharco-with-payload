@@ -1,8 +1,8 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // Get Direction (hover-direction helper, ported from design-ref)
@@ -10,12 +10,12 @@ export const getDirection = (
   ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
   obj: HTMLElement,
 ) => {
-  const { width: w, height: h, left, top } = obj.getBoundingClientRect()
-  const x = ev.clientX - left - (w / 2) * (w > h ? h / w : 1)
-  const y = ev.clientY - top - (h / 2) * (h > w ? w / h : 1)
-  const d = Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4
-  return d
-}
+  const { width: w, height: h, left, top } = obj.getBoundingClientRect();
+  const x = ev.clientX - left - (w / 2) * (w > h ? h / w : 1);
+  const y = ev.clientY - top - (h / 2) * (h > w ? w / h : 1);
+  const d = Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4;
+  return d;
+};
 
 // Handle Mouse Enter Event
 export const handleMouseEnter = ({
@@ -23,30 +23,30 @@ export const handleMouseEnter = ({
   ref,
   setDirection,
 }: {
-  event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ref: React.RefObject<HTMLElement | null>
-  setDirection: (item: string) => void | undefined
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>;
+  ref: React.RefObject<HTMLElement | null>;
+  setDirection: (item: string) => void | undefined;
 }) => {
-  if (!ref.current) return
+  if (!ref.current) return;
 
-  const directionElement = getDirection(event, ref.current)
+  const directionElement = getDirection(event, ref.current);
   switch (directionElement) {
     case 0:
-      setDirection('top')
-      break
+      setDirection("top");
+      break;
     case 1:
-      setDirection('right')
-      break
+      setDirection("right");
+      break;
     case 2:
-      setDirection('bottom')
-      break
+      setDirection("bottom");
+      break;
     case 3:
-      setDirection('left')
-      break
+      setDirection("left");
+      break;
     default:
-      setDirection('left')
-      break
+      setDirection("left");
+      break;
   }
 
-  return directionElement
-}
+  return directionElement;
+};

@@ -7,6 +7,7 @@
   --color-primary: #e07e27;
   --color-secondary: #55565a;
   --color-third: #000000;
+  --color-ring: #e07e27;
 
   --font-titleFont: var(--titleFont);
   --font-textFont: var(--textFont);
@@ -5764,5 +5765,33 @@ nav > div {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+/* ── Accessibility (T050 / FR-018) ── */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  background: #fff;
+  color: var(--primary);
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  border: 2px solid var(--primary);
+  border-radius: 0 0 6px 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
