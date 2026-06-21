@@ -1,18 +1,34 @@
 import React from 'react'
-import './styles.css'
+import type { Metadata } from 'next'
+import './globals.css'
+import { titleFont, textFont } from '@/lib/fonts'
 
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+export const metadata: Metadata = {
+  metadataBase: new URL('https://pharco-2025.vercel.app'),
+  title: {
+    default: 'Pharco Corporation',
+    template: '%s · Pharco Corporation',
+  },
+  description:
+    'Egyptian pharmaceutical pioneer developing therapies that improve global health since 1957.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Pharco Corporation',
+    title: 'Pharco Corporation',
+    description:
+      'Egyptian pharmaceutical pioneer developing therapies that improve global health since 1957.',
+  },
+  twitter: { card: 'summary_large_image' },
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
+export default function FrontendLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en">
-      <body>
-        <main>{children}</main>
+    <html lang="en" className={`${titleFont.variable} ${textFont.variable}`}>
+      <body suppressHydrationWarning>
+        {/* TODO(foundational): <Header/> … <Footer/> <ScrollToTop/> <Toaster/> (tasks T009/T014/T015) */}
+        {children}
       </body>
     </html>
   )

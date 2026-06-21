@@ -31,12 +31,12 @@ keeping design-ref's utility class names (v4 token names are identical, see rese
 
 **Purpose**: Dependencies, build wiring, assets.
 
-- [ ] T001 Add Phase 1 dependencies to `package.json` and install (pnpm) per research.md D12: `tailwindcss`, `@tailwindcss/postcss`, `tw-animate-css`, `class-variance-authority`, `clsx`, `tailwind-merge`, `@radix-ui/react-{dialog,label,navigation-menu,slot}`, `framer-motion`, `embla-carousel-react`, `embla-carousel-autoplay`, `sonner`, `lucide-react`, `react-icons`, `react-hook-form`, `zod`, `@hookform/resolvers`
-- [ ] T002 [P] Create `postcss.config.mjs` with `{ plugins: { '@tailwindcss/postcss': {} } }`
-- [ ] T003 [P] Copy `design-ref/public/fonts/*.ttf` → `public/fonts/` (DMSerifDisplay-Regular, Ubuntu-{Light,Regular,Medium,Bold}; skip `fonts.rar`)
-- [ ] T004 [P] Copy `design-ref/public/images/**` → `public/images/`
-- [ ] T005 [P] Create `src/lib/utils.ts` exporting `cn()` (clsx + tailwind-merge), ported from `design-ref/src/lib/utils.ts`
-- [ ] T006 [P] Remove leftover scaffold: delete `src/app/my-route/` and the Payload demo `src/app/(frontend)/styles.css` starter (replaced by globals.css in T007)
+- [X] T001 Add Phase 1 dependencies to `package.json` and install (pnpm) per research.md D12: `tailwindcss`, `@tailwindcss/postcss`, `tw-animate-css`, `class-variance-authority`, `clsx`, `tailwind-merge`, `@radix-ui/react-{dialog,label,navigation-menu,slot}`, `framer-motion`, `embla-carousel-react`, `embla-carousel-autoplay`, `sonner`, `lucide-react` (pinned 0.548.0 to match design-ref), `react-icons`, `react-hook-form`, `zod`, `@hookform/resolvers`
+- [X] T002 [P] Create `postcss.config.mjs` with `{ plugins: { '@tailwindcss/postcss': {} } }`
+- [X] T003 [P] Copy `design-ref/public/fonts/*.ttf` → `public/fonts/` (5 ttf copied; skipped `fonts.rar`)
+- [X] T004 [P] Copy `design-ref/public/images/**` → `public/images/` (249 files)
+- [X] T005 [P] Create `src/lib/utils.ts` exporting `cn()` (+ getDirection/handleMouseEnter), ported from `design-ref/src/lib/utils.ts`
+- [X] T006 [P] Remove leftover scaffold: deleted `src/app/my-route/` and the Payload demo `src/app/(frontend)/styles.css` starter (replaced by globals.css in T007)
 
 ---
 
@@ -46,10 +46,10 @@ keeping design-ref's utility class names (v4 token names are identical, see rese
 
 **⚠️ CRITICAL**: No user-story page can render correctly until this phase is done.
 
-- [ ] T007 Create `src/app/(frontend)/globals.css`: `@import "tailwindcss"; @import "tw-animate-css";` + `@theme` mapping all v3 tokens (research.md D2: `--color-primary/secondary/third`, `--font-titleFont/textFont`, `--animate-*`) + `@utility container` (D3) + ported `@keyframes` (marquee/fadeIn/accordion); port base rules from `design-ref/src/styles/globals.css`, converting any v3-only `@apply`/`theme()` usages (depends: T001, T002)
-- [ ] T008 [P] Create `src/lib/fonts.ts` using `next/font/local`: title=DM Serif Display `variable:"--titleFont"`, text=Ubuntu weights `variable:"--textFont"` (depends: T003)
+- [X] T007 Create `src/app/(frontend)/globals.css`: ported design-ref globals verbatim; swapped `@tailwind` → `@import "tailwindcss"; @import "tw-animate-css";` + `@theme` (colors, fonts, `--animate-*`) + `@keyframes` (marquee/fadeIn/accordion). NOTE: design-ref hand-defines `.container` (1280px) in CSS → kept as-is, no `@utility container` needed. Fixed v4-removed `bg-opacity-55` → `bg-primary/55`. **Compiles clean (next build ✓).** (depends: T001, T002)
+- [X] T008 [P] Create `src/lib/fonts.ts` using `next/font/local`: title=DM Serif Display `variable:"--titleFont"`, text=Ubuntu-Light `variable:"--textFont"` (depends: T003)
 - [ ] T009 Create `src/app/(frontend)/layout.tsx` shell: apply font `.variable` classes, import `globals.css`, render `<Header/> {children} <Footer/> <ScrollToTop/> <Toaster/>`, set `metadataBase` + default title template + default OG (depends: T007, T008, T014, T015)
-- [ ] T010 [P] Create `src/data/nav.ts` (header + footer nav tree) ported from `design-ref/src/components/nav-data.ts`
+- [X] T010 [P] Create `src/data/nav.ts` (NAV + FOOTER_GROUPS) ported from `design-ref/src/components/nav-data.ts`
 - [ ] T011 [P] Port UI primitives to `src/components/ui/` — button, input, textarea, label, form, dialog, sheet, navigation, carousel, breadcrumbs, sonner — from `design-ref/src/components/ui/*`, retuned to v4 tokens (depends: T005, T007)
 - [ ] T012 [P] Port global components to `src/components/global/` — `NextImage.tsx`, `ScrollToTop.tsx`, `Reveal.tsx` (framer-motion, reduced-motion guard), `Marquee.tsx`, `Toaster` (sonner) (depends: T007)
 - [ ] T013 [P] Port inner components to `src/components/inner/` — `PageBanner`, `SectionHeader`, `StatCard`, `Counter`, `Breaker` from `design-ref/src/components/inner/*` (depends: T007)
