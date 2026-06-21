@@ -125,9 +125,9 @@ unknown slug (shows not-found).
 **Independent Test**: Submit each form with invalid input (inline errors, blocked) and valid input
 (success toast, reset); no network/DB call.
 
-- [~] T045 [P] [US3] Create `src/features/contact/contactSchema.ts` (zod) + `ContactForm.tsx` (RHF + `@hookform/resolvers/zod` + ui/form), success via sonner toast + reset; render in `features/contact/ContactView` + `src/app/(frontend)/contact/page.tsx` (depends: T011, T012)
-- [~] T046 [P] [US3] Create `src/features/careers/applySchema.ts` (zod) + `ApplyForm.tsx` (RHF + zod, client-side CV type/size check) + `src/app/(frontend)/careers/apply/page.tsx`, success toast + reset (depends: T011, T012)
-- [~] T047 [US3] Preserve reCAPTCHA UI markup in both forms (visual only, not enforced — FR-015); confirm submit handlers make NO network/persistence calls (depends: T045, T046)
+- [X] T045 [P] [US3] Create `src/features/contact/contactSchema.ts` (zod) + `ContactForm.tsx` (RHF + `@hookform/resolvers/zod` + ui/form), success via sonner toast + reset; render in `features/contact/ContactView` + `src/app/(frontend)/contact/page.tsx` (depends: T011, T012)
+- [X] T046 [P] [US3] Create `src/features/careers/applySchema.ts` (zod) + `ApplyForm.tsx` (RHF + zod, client-side CV type/size check) + `src/app/(frontend)/careers/apply/page.tsx`, success toast + reset (depends: T011, T012)
+- [X] T047 [US3] Preserve reCAPTCHA UI markup in both forms (visual only, not enforced — FR-015); confirm submit handlers make NO network/persistence calls (depends: T045, T046)
 
 **Checkpoint**: Both forms behave per contract with no backend.
 
@@ -139,7 +139,7 @@ unknown slug (shows not-found).
 - [X] T049 [P] Create `src/app/(frontend)/robots.ts` (allow all; reference sitemap)
 - [ ] T050 Accessibility pass across components (FR-018): semantic landmarks + heading order, labels/`aria-describedby` on form fields, visible focus, meaningful/empty `alt`, AA contrast, reduced-motion guard
 - [ ] T051 [P] Image audit: ensure every `next/image` uses static import or explicit width/height to keep CLS ≤ 0.1
-- [ ] T052 [P] SEO sweep: confirm every static + dynamic route exports unique title + description + OG/Twitter
+- [X] T052 [P] SEO sweep: confirm every static + dynamic route exports unique title + description + OG/Twitter
 - [ ] T053 Run `pnpm lint` + Prettier (incl. prettier-plugin-tailwindcss); fix issues
 - [ ] T054 Run `pnpm build` and confirm it succeeds with NO `DATABASE_URL` (website build is static); click through every route in `contracts/routes.md` vs live
 - [ ] T055 Hand deploy/preview to owner for Core Web Vitals + speed tests (SC-009) — do NOT run Lighthouse locally

@@ -1,8 +1,12 @@
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import ProductDetailClient from "./ProductDetailClient";
 import CTALink from "@/components/CTALink";
 
-export const metadata = { title: "Product Detail · Pharco" };
+export const metadata = pageMeta({
+  title: "Product Detail",
+  description: "Detailed product information from Pharco Corporation, including indications, composition, and prescribing guidance for healthcare professionals.",
+})
 
 export default function ProductDetailPage() {
   return (
